@@ -1,23 +1,24 @@
 #!/usr/bin/python3
 if __name__ == "__main__":
-    from calculator_1 import add, sub, mul, div
     from sys import argv
-
-    if len(argv) != 4:
-        print("Usage: ./100-my_calculator.py <a> <operator> <b>")
+    from calculator_1 import add, sub, mul, div
+    argc = len(argv)
+    if argc != 4:
+        print('Usage: {} <a> <operator> <b>'.format(argv[0]))
         exit(1)
-
-    numb1 = int(argv[1])
-    numb2 = int(argv[3])
-
-    if argv[2] not in ["+", "-", "*", "/"]:
-        print("Unknown operator. Available operators: +, -, * and /")
+    ops = {
+        '+': add,
+        '-': sub,
+        '*': mul,
+        '/': div
+    }
+    if argv[2] in ops:
+        num1 = int(argv[1])
+        num2 = int(argv[3])
+        op = ops[argv[2]]
+        result = op(num1, num2)
+        print('{:d} {:s} {:d} = {:d}'.format(num1, argv[2], num2, result))
+    else:
+        print('Unknown operator. Available operators: +, -, * and /')
         exit(1)
-    elif argv[2] is "+":
-        print("{} + {} = {}".format(numb1, numb2, add(numb1, numb2)))
-    elif argv[2] is "-":
-        print("{} - {} = {}".format(numb1, numb2, sub(numb1, numb2)))
-    elif argv[2] is "*":
-        print("{} * {} = {}".format(numb1, numb2, mul(numb1, numb2)))
-    elif argv[2] is "/":
-        print("{} / {} = {}".format(numb1, numb2, div(numb1, numb2)))
+    exit(0)
