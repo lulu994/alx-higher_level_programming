@@ -1,0 +1,21 @@
+[0;1;32m●[0m docker.service - Docker Application Container Engine
+     Loaded: loaded (/lib/systemd/system/docker.service; enabled; vendor preset: enabled)
+     Active: [0;1;32mactive (running)[0m since Wed 2023-08-16 12:51:54 CEST; 1min 0s ago
+TriggeredBy: [0;1;32m●[0m docker.socket
+       Docs: https://docs.docker.com
+   Main PID: 6316 (dockerd)
+      Tasks: 12
+     Memory: 31.4M
+     CGroup: /system.slice/docker.service
+             └─6316 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+
+Aug 16 12:51:54 Neddah dockerd[6316]: time="2023-08-16T12:51:54.331901727+02:00" level=info msg="Loading containers: start."
+Aug 16 12:51:54 Neddah dockerd[6316]: time="2023-08-16T12:51:54.622084952+02:00" level=info msg="Loading containers: done."
+Aug 16 12:51:54 Neddah dockerd[6316]: time="2023-08-16T12:51:54.726266121+02:00" level=warning msg="WARNING: No blkio throttle.read_bps_device support"
+Aug 16 12:51:54 Neddah dockerd[6316]: time="2023-08-16T12:51:54.726391974+02:00" level=warning msg="WARNING: No blkio throttle.write_bps_device support"
+Aug 16 12:51:54 Neddah dockerd[6316]: time="2023-08-16T12:51:54.726406375+02:00" level=warning msg="WARNING: No blkio throttle.read_iops_device support"
+Aug 16 12:51:54 Neddah dockerd[6316]: time="2023-08-16T12:51:54.729564599+02:00" level=warning msg="WARNING: No blkio throttle.write_iops_device support"
+Aug 16 12:51:54 Neddah dockerd[6316]: time="2023-08-16T12:51:54.729632655+02:00" level=info msg="Docker daemon" commit=a61e2b4 graphdriver=overlay2 version=24.0.5
+Aug 16 12:51:54 Neddah dockerd[6316]: time="2023-08-16T12:51:54.730039516+02:00" level=info msg="Daemon has completed initialization"
+Aug 16 12:51:54 Neddah dockerd[6316]: time="2023-08-16T12:51:54.824448814+02:00" level=info msg="API listen on /run/docker.sock"
+Aug 16 12:51:54 Neddah systemd[1]: Started Docker Application Container Engine.
