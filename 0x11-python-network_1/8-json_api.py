@@ -1,26 +1,27 @@
 #!/usr/bin/python3
-"""Check status"""
+"""
+    Script that takes in a letter and sends a POST request to
+    https://0.0.0.0:5000/search_user with the letter as a parameter
+    the letter is sent in variable q, otherwise q is empty
+    displays [<id>] <name> if repsonse is properly JSON formatted
+"""
 import requests
 import sys
 
 
-def searchapi():
-    """status"""
-    if len(sys.argv) == 1:
-        q = ""
+if __name__ == "__main__":
+    if len(sys.argv) > 1:
+        payload = {'q': sys.argv[1]}
     else:
-        q = sys.argv[1]
+        payload = {'q': ""}
 
-    result = requests.post("http://0.0.0.0:5000/search_user", data={"q": q})
+    r = requests.post("http://0.0.0.0:5000/search_user", data=payload)
 
     try:
-        data = result.json()
-        if data:
-            print("[{}] {}".format(data["id"], data["name"]))
-        else:
+        r_json = r.json()
+        if r_json == {}:
             print("No result")
-    except:
+        else:
+            print("[{}] {}".format(r_json['id'], r_json['name']))
+    except ValueError:
         print("Not a valid JSON")
-
-if __name__ == "__main__":
-    searchapi()
