@@ -1,29 +1,21 @@
 #!/usr/bin/python3
-
-import requests
+"""api thing"""
 import sys
+import requests
 
-def get_recent_commits(owner, repo):
-    url = f'https://api.github.com/repos/{owner}/{repo}/commits'
-    params = {'per_page': 10}
 
+def apidata():
+    """apidata"""
+    url = "https://api.github.com/repos/{}/{}/commits".format(sys.argv[2],
+                                                              sys.argv[1])
+    result = requests.get(url)
     try:
-        response = requests.get(url, params=params)
-        response.raise_for_status()
-
-        commits = response.json()
-        for commit in commits:
-            sha = commit['sha']
-            author_name = commit['commit']['author']['name']
-            print(f"{sha}: {author_name}")
-    except requests.exceptions.HTTPError as e:
-        print(f"Error: {e}")
+        d = result.json()
+        for i in range(10):
+            print("{}: {}".format(d[i]["sha"],
+                                  d[i]["commit"]["author"]["name"]))
+    except IndexError:
+        pass
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
-        sys.exit("Usage: ./100-github_commits.py <owner> <repo>")
-
-    owner = sys.argv[1]
-    repo = sys.argv[2]
-    get_recent_commits(owner, repo)
-
+    apidata()
