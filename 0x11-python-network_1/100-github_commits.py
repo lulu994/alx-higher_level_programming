@@ -1,21 +1,21 @@
 #!/usr/bin/python3
-"""api thing"""
-import sys
+"""
+That takes your GITHUB credentials(username and password) and uses the
+GitHub Api to display your id
+"""
 import requests
-
-
-def apidata():
-    """apidata"""
-    url = "https://api.github.com/repos/{}/{}/commits".format(sys.argv[2],
-                                                              sys.argv[1])
-    result = requests.get(url)
-    try:
-        d = result.json()
-        for i in range(10):
-            print("{}: {}".format(d[i]["sha"],
-                                  d[i]["commit"]["author"]["name"]))
-    except IndexError:
-        pass
+from requests.auth import HTTPBasicAuth
+from sys import argv
 
 if __name__ == "__main__":
-    apidata()
+    repository = argv[1]
+    name = argv[2]
+    repository_name = "{}/{}/commits".format(name, repository)
+    res = requests.get("https://api.github.com/repos/" + repository_name)
+    commit_json = res.json()
+    for i, commit_current in enumerate(commit_json):
+        if i == 10:
+            break
+        idCommit = commit_current["sha"]
+        nameCommit = commit_current["commit"]["author"]["name"]
+        print("{}: {}".format(idCommit, nameCommit))
