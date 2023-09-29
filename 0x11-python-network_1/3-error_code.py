@@ -1,18 +1,15 @@
 #!/usr/bin/python3
-"""Send request"""
-import urllib.request
-import urllib.error
-import sys
-
-
-def sender():
-    """sender"""
-    try:
-        with urllib.request.urlopen(sys.argv[1]) as response:
-            html = response.read()
-            print(html.decode("utf-8"))
-    except urllib.error.HTTPError as e:
-        print("Error code: {}".format(e.code))
+"""
+Script that takes in a URL, sends a request to the URL and displays the body
+of the response(decoded in UTF-8)
+"""
+from urllib import request, parse, error
+from sys import argv
 
 if __name__ == "__main__":
-    sender()
+    res = request.Request(argv[1])
+    try:
+        with request.urlopen(res) as respons:
+            print(respons.read().decode("utf-8"))
+    except error.URLError as exception:
+        print("Error code: {}".format(exception.code))
